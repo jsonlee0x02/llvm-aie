@@ -41,6 +41,15 @@ public:
                                 AssumptionCache &AC, TargetLibraryInfo *LibInfo,
                                 HardwareLoopInfo &HWLoopInfo);
   bool isProfitableOuterLSR(const Loop &L) const;
+
+  unsigned getStoreVectorFactor(unsigned VF, unsigned StoreSize,
+                                unsigned ChainSizeInBytes,
+                                VectorType *VecTy) const;
+  unsigned getLoadVectorFactor(unsigned VF, unsigned LoadSize,
+                               unsigned ChainSizeInBytes,
+                               VectorType *VecTy) const;
+  bool isLegalToVectorizeStoreChain(unsigned ChainSizeInBytes, Align Alignment,
+                                    unsigned AddrSpace) const;
 };
 
 } // end namespace llvm
